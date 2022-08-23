@@ -39,7 +39,7 @@ public class UserController {
         for (User user:userService.getAllUsers()) {
             if(user.getEmail().equals(email)){
                 if(user.getPassword().equals(password)){
-                    userLogged = userService.login(user.getEmail(), user.getPassword()).get();
+                    userLogged = userService.login(email, password).get();
                 }
             }
         }
