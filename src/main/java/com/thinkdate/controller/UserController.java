@@ -3,9 +3,7 @@ package com.thinkdate.controller;
 import com.thinkdate.model.User;
 import com.thinkdate.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +31,6 @@ public class UserController {
 
     @PostMapping("/login")
     public User getUserLogin(@ModelAttribute("email") @Valid String email, @ModelAttribute("password") @Valid String password, BindingResult bindingResult){
-        // récupérera en POST le mail et le password
         User userLogged = new User();
 
         for (User user:userService.getAllUsers()) {
@@ -44,5 +41,14 @@ public class UserController {
             }
         }
         return userLogged;
+    }
+
+    @PostMapping("")
+    public String newUser(@ModelAttribute("firstname") @Valid String firstname,@ModelAttribute("lastname") @Valid String lastname,@ModelAttribute("email") @Valid String email,@ModelAttribute("password") @Valid String password, BindingResult bindingResult){
+        if(!bindingResult.hasErrors()){
+            userService.save(new User(firstname, lastname, email,password));
+            return "Création ok";
+        } else
+            return "Problème lors de la création";
     }
 }

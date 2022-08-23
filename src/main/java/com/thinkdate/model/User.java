@@ -25,8 +25,7 @@ public class User {
         super();
     }
 
-    public User(Long id, String firstname, String lastname, String email, String password) {
-        this.userId = id;
+    public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
