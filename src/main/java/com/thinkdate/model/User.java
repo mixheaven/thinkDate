@@ -1,5 +1,8 @@
 package com.thinkdate.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,7 +17,8 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Birthday> birthdays;
 
     public User(){
