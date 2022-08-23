@@ -8,7 +8,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
     private String firstname;
     private String lastname;
     private String email;
@@ -22,7 +22,7 @@ public class User {
     }
 
     public User(Long id, String firstname, String lastname, String email, String password) {
-        this.id = id;
+        this.userId = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -30,11 +30,11 @@ public class User {
     }
 
     public Long getId() {
-        return id;
+        return userId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getFirstname() {
