@@ -20,9 +20,9 @@ public class BirthdayServiceImpl implements BirthdayService{
 
 
 
-    public Optional<Birthday> getBirthdayById(Long user, Long id) {
-        return birthdayRepository.findBirthdayByUserIdAndId(user, id);
-    }
+    /*public Optional<Birthday> getBirthdayById(Long id) {
+        return birthdayRepository.findBirthdayByUserIdAndId(id);
+    }*/
 
     @Override
     public List<Birthday> getAllUserBirthdays(Long userId) {
