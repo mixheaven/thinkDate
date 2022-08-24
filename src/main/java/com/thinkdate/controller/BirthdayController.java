@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users/{userId}/")
@@ -42,5 +41,11 @@ public class BirthdayController {
         else {
             return "Mal joué ! Création échouée";
         }
+    }
+
+    @GetMapping("/birthdays/{birthdayId}")
+    @ResponseBody
+    public Birthday getSingleBirthday(@PathVariable("birthdayId") Long birthDayId) {
+        return birthdayService.getBirthdayById(birthDayId).get();
     }
 }
