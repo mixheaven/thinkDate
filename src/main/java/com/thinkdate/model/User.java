@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class User {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Birthday> birthdays;
+    private List<Birthday> birthdays;
 
     public User(){
         super();
@@ -72,7 +73,7 @@ public class User {
         this.password = password;
     }
 
-    public Set<Birthday> getBirthdays() {
+    public List<Birthday> getBirthdays() {
         return birthdays;
     }
 

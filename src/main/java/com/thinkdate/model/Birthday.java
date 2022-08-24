@@ -24,8 +24,7 @@ public class Birthday {
         super();
     }
 
-    public Birthday(Long id, String firstname, String lastname, User user, LocalDate date) {
-        this.id = id;
+    public Birthday(String firstname, String lastname, User user, LocalDate date) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.user = user;
