@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users/{userId}/")
@@ -25,6 +24,12 @@ public class BirthdayController {
     @ResponseBody
     public List<Birthday> getBirthdays(@PathVariable("userId") Long userId) {
         return userService.findUserById(userId).get().getBirthdays();
+    }
+
+    @GetMapping("/birthdays/{birthdayId}")
+    @ResponseBody
+    public Birthday getSingleBirthday(@PathVariable("birthdayId") Long birthDayId) {
+        return birthdayService.getBirthdayById(birthDayId).get();
     }
 
     @PostMapping("/birthdays")
@@ -43,9 +48,24 @@ public class BirthdayController {
         }
     }
 
-    @GetMapping("/birthdays/{birthdayId}")
-    @ResponseBody
-    public Birthday getSingleBirthday(@PathVariable("birthdayId") Long birthDayId) {
-        return birthdayService.getBirthdayById(birthDayId).get();
+    @PutMapping("/birthdays/{birthdayId}")
+    public String updateBirthday(@PathVariable("birthdayId") Long birthDayId,
+                                   @ModelAttribute("firstname") @Valid String firstname,
+                                   @ModelAttribute("lastname") @Valid String lastname,
+                                   @ModelAttribute("date") @Valid String date,
+                                   BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            Birthday birthday = birthdayService.getBirthdayById(birthDayId).get();
+
+            birthday.setFirstname(firstname);
+            birthday.setLastname(lastname);
+            birthday.setDate(LocalDate.parse(date));
+
+            birthdayService.save(birthday);
+            return "Votre anniversaire à bien été modifié !";
+        }
+        else {
+            return "Votre anniversaire n'a pas pu être modifié !";
+        }
     }
 }

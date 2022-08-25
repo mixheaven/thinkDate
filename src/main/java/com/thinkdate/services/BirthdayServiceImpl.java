@@ -18,8 +18,6 @@ public class BirthdayServiceImpl implements BirthdayService{
     @Autowired
     private UserService userService;
 
-
-
     @Override
     public Optional<Birthday> getBirthdayById(Long id) {
         return birthdayRepository.findById(id);
